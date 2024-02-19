@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Message {
     String line;
     public Message (String str){
@@ -16,7 +18,7 @@ public class Message {
 
     public int amountOfWords(){
         // слова - все что отделено друг от друга пробелами
-        var array = line.split(" ");
+        var array = Arrays.stream(line.split(" ")).filter(e-> !e.trim().isEmpty()).toArray(String[]::new);
         return array.length;
     }
 
@@ -31,7 +33,8 @@ public class Message {
         //предполагается, что все номера состоят из 4 цифр
         // также предпологается, что номер всегда есть
         var numberIndex = line.indexOf("№");
-        return line.substring(numberIndex+1, Math.min(numberIndex + 6, line.length())).trim();
+        return numberIndex == -1 ? "Номера нет" :
+                line.substring(numberIndex+1, Math.min(numberIndex + 6, line.length())).trim();
     }
 
     public String knSubstring(int k, int n, String str){

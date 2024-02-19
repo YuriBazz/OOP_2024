@@ -16,5 +16,6 @@ public class Main {
         var n = Dialog.nDialog();
         var s = Dialog.stringDialog();
         System.out.printf("Новая строка: %s", mess.knSubstring(k,n,s));
+
     }
 }
