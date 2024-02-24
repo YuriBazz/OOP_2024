@@ -1,10 +1,12 @@
+import org.junit.internal.TextListener;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+
 public class Main {
     public static void main(String[] args) {
-        var segment = new Segment(new Vector3D(1.0,0.0,0.0), new Vector3D(3.0,0.0,0.0));
-        var point = new Vector3D(2.0,0.0,0.0);
-        System.out.println(segment.inSegment(point));
-        System.out.println(segment.start.x);
-        System.out.println(1/ (segment.start.y - segment.end.z));
-        System.out.println();
-        }
+        JUnitCore junit = new JUnitCore();
+        junit.addListener(new TextListener(System.out));
+        junit.run(Vector3DTest.class, SegmentTest.class);
+
     }
+}

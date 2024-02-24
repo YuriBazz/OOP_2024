@@ -1,43 +1,44 @@
 
 public class Vector3D {
-    Double x,y,z;
+    private double x,y,z;
 
-    public Vector3D (Double x1, Double y1, Double z1){
-        x = x1;
-        y = y1;
-        z = z1;
+    public Vector3D (double i, double j, double k){
+        x = i;
+        y = j;
+        z = k;
     }
 
-    public Double getX(){ return x; }
 
-    public Double getY(){
+    public double getX(){ return x; }
+
+    public double getY(){
         return y;
     }
 
-    public Double getZ(){
+    public double getZ(){
         return z;
     }
 
-    private Boolean compareToDoubles(Double f1, Double f2){
+    private boolean compareToDoubles(Double f1, Double f2){
         return Math.abs(f1 - f2) < 0.00001;
     }
 
-    private Boolean badEqual(Vector3D v){
+    private boolean badEqual(Vector3D v){
         return compareToDoubles(x,v.x) && compareToDoubles(y,v.y) && compareToDoubles(z,v.z);
     }
 
-    public Boolean equal(Vector3D v){
+    public boolean equal(Vector3D v){
         return this.sub(v).len() == 0;
     }
-    public Double scalar(Vector3D v){
+    public double scalar(Vector3D v){
         return x*v.x + y*v.y + z*v.z;
     }
 
-    public Double len(){
+    public double len(){
         return Math.sqrt(this.scalar(this));
     }
 
-    public Vector3D multiply(Double factor){
+    public Vector3D multiply(double factor){
         return new Vector3D (x * factor, y * factor, z * factor);
     }
 
@@ -53,7 +54,7 @@ public class Vector3D {
         return new Vector3D(y * v.z - z * v.y, -x * v.z + v.x * z, x * v.y - v.x * y);
     }
 
-    public Boolean pCollin(Vector3D v){
+    public boolean pCollin(Vector3D v){
         return this.vecX(v).equal(new Vector3D(0.0,0.0,0.0));
     }
 }
