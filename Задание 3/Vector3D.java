@@ -27,8 +27,12 @@ public class Vector3D {
         return compareToDoubles(x,v.x) && compareToDoubles(y,v.y) && compareToDoubles(z,v.z);
     }
 
-    public boolean equal(Vector3D v){
-        return this.sub(v).len() == 0;
+    @Override
+    public boolean equals(Object o){
+        if (this == o) {return true;}
+        if (o == null || getClass() != o.getClass()) {return false;}
+        Vector3D vec = (Vector3D) o;
+        return this.sub(vec).len() == 0;
     }
     public double scalar(Vector3D v){
         return x*v.x + y*v.y + z*v.z;
@@ -55,6 +59,6 @@ public class Vector3D {
     }
 
     public boolean pCollin(Vector3D v){
-        return this.vecX(v).equal(new Vector3D(0.0,0.0,0.0));
+        return this.vecX(v).equals(new Vector3D(0.0,0.0,0.0));
     }
 }

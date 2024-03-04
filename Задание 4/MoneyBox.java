@@ -1,6 +1,10 @@
 public class MoneyBox extends HeavyBox{
     private int cost;
 
+    MoneyBox(Box box){
+        super(box, -1);
+        cost = - 1;
+    }
     // Конструирование клона объекта
     MoneyBox(MoneyBox ob) { // передача объекта конструктору
         super(ob);
@@ -25,6 +29,9 @@ public class MoneyBox extends HeavyBox{
         cost = c;
     }
 
+    MoneyBox(int a, int b){
+
+    }
     @Override
     String stringBox() {
         return super.stringBox() + " Цена: " + cost + ".";

@@ -10,12 +10,18 @@ public class BoxTest {
         HeavyBox box = new HeavyBox(15, 10, 20, 5);
         System.out.println(box.stringBox());
         vol = box.getVolume();
-        System.out.println("Объем: "+vol);
+        System.out.println("Объем: "+ vol);
 
         MoneyBox boxM = new MoneyBox (20, 5, 100);
         System.out.println(boxM.stringBox());
         vol = boxM.getVolume();
-        System.out.println("Объем: "+vol);
+        System.out.println("Объем: "+ vol);
+
+        MoneyBox box2 = new MoneyBox();
+        Box box3 = new Box(1);
+        MoneyBox bm3 = new MoneyBox(box3);
+        System.out.println(bm3.stringBox());
+
     }
 
 }
