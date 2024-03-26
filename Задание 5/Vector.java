@@ -43,16 +43,16 @@ public class Vector {
         System.out.printf("Размерность %s. ", vector.dimension);
         System.out.print("Координаты (");
         for(int i = 0; i  < vector.dimension - 1; i++)
-            System.out.printf("%s, ", vector.coordinates[i]);
-        System.out.printf("%s)\n\r", vector.coordinates[vector.dimension - 1]);
+            System.out.printf("%f, ", vector.coordinates[i]);
+        System.out.printf("%f)\n\r", vector.coordinates[vector.dimension - 1]);
     }
 
     public void printVector(){
-        System.out.printf("Размерность %s. ", dimension);
+        System.out.printf("Размерность %d. ", dimension);
         System.out.print("Координаты (");
         for(int i = 0; i  < dimension - 1; i++)
-            System.out.printf("%s, ", coordinates[i]);
-        System.out.printf("%s)\n\r", coordinates[dimension - 1]);
+            System.out.printf("%f, ", coordinates[i]);
+        System.out.printf("%f)\n\r", coordinates[dimension - 1]);
     }
 
     public double scalar(Vector vector){
@@ -98,7 +98,7 @@ public class Vector {
     }
 
     public double pr(Vector vector){
-        return this.scalar(vector) / Math.sqrt(vector.scalar(vector));
+        return this.scalar(vector) / vector.len();
     }
 
 }

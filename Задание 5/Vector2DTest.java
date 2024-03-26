@@ -5,7 +5,7 @@ public class Vector2DTest {
     {
         Vector2D SP = P.sub2D(S);
         Vector2D pr = SP.vectorProectionOn(normal);
-        return S.add2D(pr.multiply2D(2));
+        return S.add2D(pr).add2D(pr);
     }
 
     public static Vector2D bissectris(Vector2D A, Vector2D B, Vector2D P, Vector2D normal)
@@ -18,21 +18,23 @@ public class Vector2DTest {
         Vector2D BA1 = A1.sub2D(B);
         Vector2D normalA1B = BA1.ort();
         if(normal.collin(normalA1B)) throw new ParallelException();
-        Vector2D A1X = BA1.multiply2D((pr.len() * pr.len()) / BA1.scalar(pr.multiply2D(-1)));
+        var factor = -(pr.scalar(pr)) / BA1.scalar(pr);
+        Vector2D A1X = BA1.multiply2D(factor);
         return A1.add2D(A1X);
     }
 
     public static void main(String[] args)
     {
+
         Vector2D
-                A = new Vector2D(0,0),
-                B = new Vector2D(0,0),
-                P = new Vector2D(0,0),
-                normal = new Vector2D(0,0);
+                A = new Vector2D(2,0),
+                B = new Vector2D(-1,2),
+                P = new Vector2D(1,1),
+                normal = new Vector2D(1,-1);
         try
         {
-            bissectris(A,B,P,normal).printVector();
             symmetry(P,normal,A).printVector();
+            bissectris(A,B,P,normal).printVector();
         }
         catch(ABException e)
         {
@@ -42,6 +44,7 @@ public class Vector2DTest {
         {
             System.out.println(e.getMessage());
         }
+
         var letters = new String[] {"a", "b", "c", "d"};
         var array =
                 new Vector2D[]
@@ -51,6 +54,7 @@ public class Vector2DTest {
                     new Vector2D(0,-1),
                     new Vector2D(3.0/5,-4.0/5)
                 };
+        System.out.println("something");
         var orts = Arrays.stream(array).filter(x -> x.len() == 1).toArray(Vector2D[] :: new);
         for (Vector2D ort : orts) ort.printVector();
         for(int i = 0; i < array.length - 1 ; i++)

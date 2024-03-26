@@ -24,7 +24,7 @@ public class Vector2D extends Vector {
     }
 
     public Vector2D ort(){
-        return new Vector2D(y == 0 ? 0 : -y, x);
+        return new Vector2D(y, x == 0 ? x : -x);
     }
 
     public double getX(){
@@ -47,7 +47,7 @@ public class Vector2D extends Vector {
 
 
     public Vector2D vectorProectionOn(Vector2D vector){
-        return new Vector2D(vector.multiply(this.pr(vector)));
+        return new Vector2D(vector.multiply(this.pr(vector)/ vector.len()));
     }
 
     public boolean collin(Vector2D vector){
