@@ -24,7 +24,7 @@ public class Vector2D extends Vector {
     }
 
     public Vector2D ort(){
-        return new Vector2D(y, x == 0 ? x : -x);
+        return new Vector2D(y, -1 * x);
     }
 
     public double getX(){
@@ -51,7 +51,7 @@ public class Vector2D extends Vector {
     }
 
     public boolean collin(Vector2D vector){
-        return x * vector.y == vector.x *  y;
+        return Math.abs(x * vector.y - vector.x *  y) < 0.000001;
     }
 
     public double[] decomposition(Vector2D vector1, Vector2D vector2) throws VecCollinearException{
@@ -67,6 +67,6 @@ public class Vector2D extends Vector {
         if (this == o) {return true;}
         if (o == null || getClass() != o.getClass()) {return false;}
         Vector2D vec = (Vector2D) o;
-        return this.sub(vec).len() == 0;
+        return this.sub(vec).len() < 0.00001;
     }
 }

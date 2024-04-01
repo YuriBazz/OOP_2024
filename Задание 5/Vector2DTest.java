@@ -28,34 +28,43 @@ public class Vector2DTest {
 
         Vector2D
                 A = new Vector2D(2,0),
-                B = new Vector2D(-1,2),
+                B = new Vector2D(-1,0),
                 P = new Vector2D(1,1),
                 normal = new Vector2D(1,-1);
+
+        try{
+            var d = A.decomposition(
+                    new Vector2D(-1,-1),
+                    new Vector2D(1,1)
+            );
+            System.out.printf("x = %.3f ", d[0]);
+            System.out.printf("y = %.3f\n\r", d[1]);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         try
         {
             symmetry(P,normal,A).printVector();
             bissectris(A,B,P,normal).printVector();
         }
-        catch(ABException e)
+        catch(Exception e)
         {
             System.out.println(e.getMessage());
         }
-        catch(ParallelException e)
-        {
-            System.out.println(e.getMessage());
-        }
+
 
         var letters = new String[] {"a", "b", "c", "d"};
         var array =
                 new Vector2D[]
                 {
-                    new Vector2D(-3.0/5, 4.0/3),
+                    new Vector2D(-3.0/5, 4.0/5),
                     new Vector2D(2.0/3,2.0/3),
                     new Vector2D(0,-1),
                     new Vector2D(3.0/5,-4.0/5)
                 };
-        System.out.println("something");
-        var orts = Arrays.stream(array).filter(x -> x.len() == 1).toArray(Vector2D[] :: new);
+        System.out.println("Задание из таблички");
+        var orts = Arrays.stream(array).filter(x -> Math.abs(x.len() - 1) < 0.00001).toArray(Vector2D[] :: new);
         for (Vector2D ort : orts) ort.printVector();
         for(int i = 0; i < array.length - 1 ; i++)
             for(int j = i + 1; j < array.length; j++)

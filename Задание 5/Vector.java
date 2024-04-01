@@ -2,7 +2,7 @@ public class Vector {
     private double[] coordinates;
     private int dimension;
     Vector(double ... _coordinates_){
-        coordinates = _coordinates_;
+        coordinates = _coordinates_.clone();
         dimension = _coordinates_.length;
     }
 
@@ -51,8 +51,8 @@ public class Vector {
         System.out.printf("Размерность %d. ", dimension);
         System.out.print("Координаты (");
         for(int i = 0; i  < dimension - 1; i++)
-            System.out.printf("%f, ", coordinates[i]);
-        System.out.printf("%f)\n\r", coordinates[dimension - 1]);
+            System.out.printf("%,.3f, ", coordinates[i]);
+        System.out.printf("%,.3f)\n\r", coordinates[dimension - 1]);
     }
 
     public double scalar(Vector vector){
@@ -94,7 +94,7 @@ public class Vector {
     }
 
     public boolean orthogonal(Vector vector){
-        return this.scalar(vector) == 0;
+        return Math.abs(this.scalar(vector)) < 0.000001;
     }
 
     public double pr(Vector vector){
