@@ -2,6 +2,10 @@ package calculator;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class SimpleCalculatorGrid
 {
@@ -17,7 +21,7 @@ public class SimpleCalculatorGrid
     {
 
         JPanel windowContent = new JPanel();
-        GridLayout gl = new GridLayout(5,2);
+        GridLayout gl = new GridLayout(6,2);
         windowContent.setLayout(gl);
         var firstOperandLabel = new JLabel("Операнд 1:");
         var firstOperandField = new JTextField(10);
@@ -72,8 +76,8 @@ public class SimpleCalculatorGrid
         windowContent.add(resultButton);
         windowContent.add(resultField);
 
-        /*windowContent.add(newButton);
-        windowContent.add(saveButton);*/
+        windowContent.add(newButton);
+        windowContent.add(saveButton);
 
         var frame = new JFrame("Calculator");
         frame.setContentPane(windowContent);
@@ -95,6 +99,33 @@ public class SimpleCalculatorGrid
             {
                 resultField.setText(exception.getMessage());
             }
+        });
+
+        newButton.addActionListener(e ->
+        {
+            firstOperandField.setText("");
+            secondOperandField.setText("");
+            resultField.setText("");
+        });
+
+        saveButton.addActionListener(e->
+        {
+            var result = new File("output.txt");
+            try
+            {
+                var writer = new BufferedWriter(new FileWriter(result));
+                writer.write(firstOperandField.getText() +
+                        " " + operationsBox.getSelectedItem().toString() +
+                        " " + secondOperandField.getText() +
+                        " = " + resultField.getText());
+                writer.close();
+            }
+            catch (IOException ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            var saveFile = new JFileChooser(result);
+            saveFile.showSaveDialog(frame);
         });
     }
 }
