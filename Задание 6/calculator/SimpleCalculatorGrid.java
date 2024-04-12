@@ -1,7 +1,6 @@
 package calculator;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -47,6 +46,11 @@ public class SimpleCalculatorGrid
                         "комплексные числа"
                 };
         var typesBox = new JComboBox<String>(typesArray);
+        var fileMenuBar = new JMenuBar();
+        var fileMenu = new JMenu("1000-7?");
+        var saveItem = new JMenuItem("Сохранить");
+        fileMenu.add(saveItem);
+        fileMenuBar.add(fileMenu);
         var font = new Font("Arial", Font.BOLD, 20);
         firstOperandField.setFont(font);
         secondOperandField.setFont(font);
@@ -81,6 +85,7 @@ public class SimpleCalculatorGrid
 
         var frame = new JFrame("Calculator");
         frame.setContentPane(windowContent);
+        frame.setJMenuBar(fileMenuBar);
         frame.setSize(1024,512);
         frame.setVisible(true);
 
@@ -110,11 +115,15 @@ public class SimpleCalculatorGrid
 
         saveButton.addActionListener(e->
         {
-            var result = new File("output.txt");
+            var saveFile = new JFileChooser();
+            saveFile.showSaveDialog(frame);
+            var result = saveFile.getSelectedFile();
             try
             {
                 var writer = new BufferedWriter(new FileWriter(result));
-                writer.write(firstOperandField.getText() +
+                if(firstOperandField.getText().isEmpty() || secondOperandField.getText().isEmpty())
+                    writer.write("");
+                else writer.write(firstOperandField.getText() +
                         " " + operationsBox.getSelectedItem().toString() +
                         " " + secondOperandField.getText() +
                         " = " + resultField.getText());
@@ -124,8 +133,29 @@ public class SimpleCalculatorGrid
             {
                 System.out.println(ex.getMessage());
             }
-            var saveFile = new JFileChooser(result);
+
+        });
+
+        saveItem.addActionListener(e -> {
+            var saveFile = new JFileChooser();
             saveFile.showSaveDialog(frame);
+            var result = saveFile.getSelectedFile();
+            try
+            {
+                var writer = new BufferedWriter(new FileWriter(result));
+                if(firstOperandField.getText().isEmpty() || secondOperandField.getText().isEmpty())
+                    writer.write("");
+                else writer.write(firstOperandField.getText() +
+                        " " + operationsBox.getSelectedItem().toString() +
+                        " " + secondOperandField.getText() +
+                        " = " + resultField.getText());
+                writer.close();
+            }
+            catch (IOException ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+
         });
     }
 }
